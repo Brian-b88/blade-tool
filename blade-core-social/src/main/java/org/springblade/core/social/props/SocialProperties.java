@@ -13,38 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springblade.core.boot.tenant;
+package org.springblade.core.social.props;
 
+import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import me.zhyd.oauth.config.AuthConfig;
+import me.zhyd.oauth.config.AuthDefaultSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 /**
- * 多租户配置
+ * SocialProperties
  *
  * @author Chill
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "blade.tenant")
-public class BladeTenantProperties {
+@ConfigurationProperties(prefix = "social")
+public class SocialProperties {
 
 	/**
-	 * 多租户字段名称
+	 * 启用
 	 */
-	private String column = "tenant_id";
+	private Boolean enabled = false;
 
 	/**
-	 * 多租户数据表
+	 * 域名地址
 	 */
-	private List<String> tables = new ArrayList<>();
+	private String domain;
 
 	/**
-	 * 多租户系统数据表
+	 * 类型
 	 */
-	private List<String> bladeTables = Arrays.asList("blade_notice", "blade_post", "blade_log_api", "blade_log_error", "blade_log_usual");
+	private Map<AuthDefaultSource, AuthConfig> oauth = Maps.newHashMap();
+
+	/**
+	 * 别名
+	 */
+	private Map<String, String> alias = Maps.newHashMap();
+
 }
